@@ -1,20 +1,23 @@
 pipeline {
-  agent any
+    agent any
 
-  tools {
-    maven 'Maven_3'
-  }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
-  stages {
-    stage('Checkout') {
-      steps { checkout scm }
+        stage('Build and Test') {
+            steps {
+                sh 'mvn clean test package'
+            }
+        }
     }
 
-    stage('Build and Test') {
-      steps {
-        bat 'mvn -version'
-        bat 'mvn clean test package'
-      }
+    post {
+        always {
+            junit 'target/surefire-reports/*.xml'
+        }
     }
-  }
 }
