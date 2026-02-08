@@ -1,5 +1,9 @@
 package com.mycompany.app;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 86a1593cee4f7f0a68ed2be8a03ec17b40c5bb01
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
