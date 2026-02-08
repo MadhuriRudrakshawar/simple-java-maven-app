@@ -12,15 +12,6 @@
   <name>my-app</name>
   <url>https://maven.apache.org</url>
 
-  <dependencies>
-    
-    <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.18.1</version>
-    </dependency>
-
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
@@ -42,13 +33,12 @@
 
   <dependencies>
     <!-- JUnit 5 -->
-   <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <version>5.10.1</version>
-        <scope>test</scope>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.10.1</version>
+      <scope>test</scope>
     </dependency>
-
 
     <!-- Selenium (if you need it for later labs) -->
     <dependency>
