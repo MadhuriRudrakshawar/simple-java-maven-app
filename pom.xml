@@ -11,7 +11,7 @@
 
   <name>my-app</name>
   <url>https://maven.apache.org</url>
-<<<<<<< HEAD
+
   <dependencies>
     
     <dependency>
@@ -19,8 +19,7 @@
         <artifactId>selenium-java</artifactId>
         <version>4.18.1</version>
     </dependency>
-=======
->>>>>>> 86a1593cee4f7f0a68ed2be8a03ec17b40c5bb01
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
