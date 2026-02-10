@@ -13,14 +13,9 @@ pipeline {
         )
     }
 
-
-
-environment {
+    environment {
         GITHUB_TOKEN = credentials('github-token')
     }
-
-
-
 
     stages {
         stage('Checkout') {
@@ -44,12 +39,11 @@ environment {
             }
         }
 
-         stage('Secure Step') {
-                    steps {
-                        sh 'echo "Token length is ${#GITHUB_TOKEN}"'
-                    }
-                }
-         }
+        stage('Secure Step') {
+            steps {
+                bat 'echo "Token length is ${#GITHUB_TOKEN}"'
+            }
+        }
     }
 
     post {
@@ -62,5 +56,4 @@ environment {
             archiveArtifacts artifacts: 'target/screenshots/**/*.png', allowEmptyArchive: true
         }
     }
-
 }
