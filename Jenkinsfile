@@ -44,6 +44,26 @@ pipeline {
                 bat 'echo "Token length is ${#GITHUB_TOKEN}"'
             }
         }
+
+        stage('SonarQube Analysis') {
+                    steps {
+                        withSonarQubeEnv('LocalSonar') {
+                            bat '''
+                              mvn sonar:sonar \
+                                -Dsonar.projectKey=simple-java-maven-app
+                            '''
+                        }
+                    }
+                }
+
+                stage('Quality Gate') {
+                    steps {
+                        timeout(time: 2, unit: 'MINUTES') {
+                            waitForQualityGate abortPipeline: true
+                        }
+                    }
+                }
+
     }
 
     post {
