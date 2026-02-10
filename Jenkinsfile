@@ -19,13 +19,8 @@ environment {
         GITHUB_TOKEN = credentials('github-token')
     }
 
-    stages {
-        stage('Secure Step') {
-            steps {
-                sh 'echo "Token length is ${#GITHUB_TOKEN}"'
-            }
-        }
-    }
+
+
 
     stages {
         stage('Checkout') {
@@ -48,6 +43,13 @@ environment {
                 bat 'mvn -B verify -DskipUnitTests=true'
             }
         }
+
+         stage('Secure Step') {
+                    steps {
+                        sh 'echo "Token length is ${#GITHUB_TOKEN}"'
+                    }
+                }
+         }
     }
 
     post {
