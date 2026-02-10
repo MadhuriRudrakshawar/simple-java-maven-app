@@ -26,7 +26,7 @@ pipeline {
 
         stage('Build and Unit Tests') {
             steps {
-                bat 'mvn -B clean test package'
+                bat 'mvn -B clean verify'
             }
         }
 
