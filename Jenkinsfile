@@ -42,14 +42,9 @@ pipeline {
                 target/surefire-reports/*.xml
                 target/failsafe-reports/*.xml
             '''
+
+            archiveArtifacts artifacts: 'target/screenshots/**/*.png', allowEmptyArchive: true
         }
-    }
-
-
-    post {
-      always {
-        archiveArtifacts artifacts: 'target/screenshots/**/*.png', allowEmptyArchive: true
-      }
     }
 
 }
