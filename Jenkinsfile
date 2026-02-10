@@ -44,4 +44,12 @@ pipeline {
             '''
         }
     }
+
+
+    post {
+      always {
+        archiveArtifacts artifacts: 'target/screenshots/**/*.png', allowEmptyArchive: true
+      }
+    }
+
 }
