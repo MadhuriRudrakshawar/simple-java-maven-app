@@ -54,6 +54,16 @@ pipeline {
             '''
 
             archiveArtifacts artifacts: 'target/screenshots/**/*.png', allowEmptyArchive: true
+
+
+            publishHTML(target: [
+                        reportDir: 'target/site/jacoco',
+                        reportFiles: 'index.html',
+                        reportName: 'JaCoCo Code Coverage',
+                        keepAll: true,
+                        alwaysLinkToLastBuild: true
+                    ])
+
         }
     }
 }
