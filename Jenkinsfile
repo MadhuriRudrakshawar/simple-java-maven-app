@@ -14,6 +14,7 @@ pipeline {
     }
 
     environment {
+        // Secret Text credential in Jenkins
         GITHUB_TOKEN = credentials('github-token')
     }
 
@@ -35,6 +36,7 @@ pipeline {
                 expression { return params.RUN_UI_TESTS }
             }
             steps {
+                // runs verify again but skips unit tests (your lab style)
                 bat 'mvn -B verify -DskipUnitTests=true'
             }
         }
@@ -46,24 +48,23 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-                    steps {
-                        withSonarQubeEnv('LocalSonar') {
-                            bat '''
-                              mvn sonar:sonar \
-                                -Dsonar.projectKey=simple-java-maven-app
-                            '''
-                        }
-                    }
+            steps {
+                withSonarQubeEnv('LocalSonar') {
+                    bat '''
+                      mvn -B sonar:sonar ^
+                        -Dsonar.projectKey=simple-java-maven-app
+                    '''
                 }
+            }
+        }
 
-                stage('Quality Gate') {
-                    steps {
-                        timeout(time: 2, unit: 'MINUTES') {
-                            waitForQualityGate abortPipeline: true
-                        }
-                    }
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
                 }
-
+            }
+        }
     }
 
     post {
@@ -75,15 +76,13 @@ pipeline {
 
             archiveArtifacts artifacts: 'target/screenshots/**/*.png', allowEmptyArchive: true
 
-
             publishHTML(target: [
-                        reportDir: 'target/site/jacoco',
-                        reportFiles: 'index.html',
-                        reportName: 'JaCoCo Code Coverage',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
-                    ])
-
+                reportDir: 'target/site/jacoco',
+                reportFiles: 'index.html',
+                reportName: 'JaCoCo Code Coverage',
+                keepAll: true,
+                alwaysLinkToLastBuild: true
+            ])
         }
     }
 }
